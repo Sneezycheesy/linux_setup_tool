@@ -90,3 +90,5 @@ read newDirs
 [ -d "~/.config" ] && cp -r ~/.config ~/.config.bak
 cp -r $PWD/.config ~/ &&
 cp -r $PWD/.scripts ~/ &&
+
+[ -d "~/.config/chromium/Default" ] && cp $PWD/.config/chromium/Prefs ~/.config/chromium/Default/
