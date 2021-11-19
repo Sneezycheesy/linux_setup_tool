@@ -1,14 +1,15 @@
 #!bash
 ## Global variables
 packages=""
-git=$(pacman -Qe | grep "git")
+git="$(pacman -Qe | grep 'git')"
+go="$(pacman -Qe | grep 'go')"
 choice=""
 
 setPackages() {
     for var in "$@"; do
         while read package; do
             packages="$packages $package"
-        done < $PWD/$var.txt
+        done < $PWD/packages/$var.txt
     done
 }
 
@@ -18,12 +19,13 @@ installPackages() {
 }
 
 installYay() {
-    [ -d "$git" ] | sudo pacman -S git
+    [ -n "$git" ] || sudo pacman -S git
+    [ -n "$go" ] || sudo pacman -S go
     echo "installing yay"
     git clone https://aur.archlinux.org/yay
     cd yay
     makepkg
-    sudo pacman -S yay*.pkg.*
+    sudo pacman -U yay*.pkg.*
     cd ..
     rm -rf yay
 }
@@ -52,6 +54,7 @@ displayMenuOptions() {
     echo "[P] Install printer packages for printing and scanning"
     echo "[S] Install sway and all its lovely custom configuration"
     echo "[ALL] Install all packages supplied with this repo"
+    echo "[F] Forward (skip this step)"
     echo "[Q] Quit"
 
     read choice
@@ -83,3 +86,7 @@ echo "Create standard home folder directories? [y/N]"
 read newDirs
 
 [ "$newDirs" = "y" ] || [ "$newDirs" = "Y" ] && mkdir ~/Documents ~/Downloads ~/Videos ~/Music ~/Pictures
+
+[ -d "~/.config" ] && cp -r ~/.config ~/.config.bak
+cp -r $PWD/.config ~/ &&
+cp -r $PWD/.scripts ~/ &&

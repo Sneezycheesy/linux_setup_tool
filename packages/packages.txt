@@ -2,3 +2,5 @@ kitty
 firefox
 thunderbird
 notepadqq
+chromium
+python
