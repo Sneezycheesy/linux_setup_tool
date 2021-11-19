@@ -1,0 +1,3 @@
+qemu
+libvirt
+virt-manager

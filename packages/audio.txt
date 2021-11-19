@@ -1,0 +1,7 @@
+alsa-utils
+pipewire
+pipewire-pulse
+pipewire-alsa
+audacious
+playerctl
+pactl

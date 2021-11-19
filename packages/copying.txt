@@ -1,0 +1,4 @@
+wl-clipboard
+grim
+slurp
+swappy

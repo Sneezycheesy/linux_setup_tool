@@ -1,0 +1,4 @@
+sway-borders-git
+swaylock-effects-git
+xorg-xwayland
+rust
