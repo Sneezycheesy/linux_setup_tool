@@ -92,3 +92,12 @@ cp -r $PWD/.config ~/ &&
 cp -r $PWD/.scripts ~/ &&
 
 [ -d "~/.config/chromium/Default" ] && cp $PWD/.config/chromium/Prefs ~/.config/chromium/Default/
+
+# setup cursor theme
+wget https://dl1.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1Njk1MjQ0OTYiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6ImQxZTY1ZDA2MWFiMWExYzA4ZjUzMTJkNTI3ZDA1YWViZDY3NWQxMGM2NDVmNDRlOTY3Njk4OTk4MGQ4MDgwOTUyOWEyNWFiOWE4MTk4N2FiMTI2OWVhNjNkYzEwMjMyZTFhYTRhYWU2MTBlM2JkMzUxZjM4NTlhYmZkMjQ0ZGM4IiwidCI6MTYzNzM1MDY5OSwic3RmcCI6IjhhOWViMDFkNTM0MDRlYzRkOTJjNzIwYzgyMzRmOTVmIiwic3RpcCI6IjgxLjIwNS4zNy4xMzIifQ.8lAEEFU9NpdC1ASkBVUgZElbykPhYY19RfFJn_iFnvo/PearDarkCursors.tar.gz
+tar xf PearDarkCursors.tar.gz
+
+[ -d ~/.local ] || mkdir ~/.local 
+&& [ -d ~/.local/share ] || mkdir ~/.local/share 
+&& [ -d ~/.local/share/icons ] || mkdir ~/.local/share/icons
+cp -r PearDarkCursors ~/.local/share/icons/

@@ -1,3 +1,5 @@
+wl-roots
+wayland
 sway-borders-git
 swaylock-effects-git
 xorg-xwayland

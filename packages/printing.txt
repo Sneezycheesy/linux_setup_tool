@@ -1,5 +1,5 @@
 simple-scan
 brother-mfc-j4420dw
-brscanconfig4
+brscan4
 cups
 system-config-printer
