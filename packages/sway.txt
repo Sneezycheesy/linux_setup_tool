@@ -1,6 +1,8 @@
 wl-roots
 wayland
-sway-borders-git
+sway
 swaylock-effects-git
 xorg-xwayland
 rust
+bemenu
+wayland-bemenu
