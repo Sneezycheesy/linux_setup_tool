@@ -10,6 +10,7 @@ setPackages() {
         while read package; do
             packages="$packages $package"
         done < $PWD/packages/$var.txt
+        [ "$var" = "sway" ] && cargo install -f swayws
     done
 }
 
@@ -87,17 +88,52 @@ read newDirs
 
 [ "$newDirs" = "y" ] || [ "$newDirs" = "Y" ] && mkdir ~/Documents ~/Downloads ~/Videos ~/Music ~/Pictures
 
-[ -d "~/.config" ] && cp -r ~/.config ~/.config.bak
-cp -r $PWD/.config ~/ &&
-cp -r $PWD/.scripts ~/ &&
+echo "Copy over config files? [Y/n]"
+read copy
+[ -n $copy ] || copy=Y
 
-[ -d "~/.config/chromium/Default" ] && cp $PWD/.config/chromium/Prefs ~/.config/chromium/Default/
+case $copy in "Y" | "y")
+    [ -d "~/.config" ] && cp -r ~/.config ~/.config.bak
+    cp -r $PWD/.config ~/ &&
+    cp -r $PWD/.scripts ~/ && ;;
+esac
+
+echo "Setup chromium prefs file? [y/N]"
+read chromium
+[ -n $chromium ] || chromium="N"
+case $chromium in "Y" | "y")
+    [ -d "~/.config/chromium" ] || mkdir ~/.config/chromium 
+    && [ -d "~/.config/chromium/Default" ] || mkdir ~/.config/chromium/Default
+    && cp $PWD/.config/chromium/Prefs ~/.config/chromium/Default/
+esac
 
 # setup cursor theme
-wget https://dl1.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1Njk1MjQ0OTYiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6ImQxZTY1ZDA2MWFiMWExYzA4ZjUzMTJkNTI3ZDA1YWViZDY3NWQxMGM2NDVmNDRlOTY3Njk4OTk4MGQ4MDgwOTUyOWEyNWFiOWE4MTk4N2FiMTI2OWVhNjNkYzEwMjMyZTFhYTRhYWU2MTBlM2JkMzUxZjM4NTlhYmZkMjQ0ZGM4IiwidCI6MTYzNzM1MDY5OSwic3RmcCI6IjhhOWViMDFkNTM0MDRlYzRkOTJjNzIwYzgyMzRmOTVmIiwic3RpcCI6IjgxLjIwNS4zNy4xMzIifQ.8lAEEFU9NpdC1ASkBVUgZElbykPhYY19RfFJn_iFnvo/PearDarkCursors.tar.gz
-tar xf PearDarkCursors.tar.gz
+echo "Setup cursor theme(s)? [y/N]"
+read cursor_setup
 
-[ -d ~/.local ] || mkdir ~/.local 
-&& [ -d ~/.local/share ] || mkdir ~/.local/share 
-&& [ -d ~/.local/share/icons ] || mkdir ~/.local/share/icons
-cp -r PearDarkCursors ~/.local/share/icons/
+[ -n $cursor_setup ] || cursor_setup="N"
+
+case $cursor_setup in "Y" | "y")
+    [ -d ~/.icons ] || mkdir ~/.icons
+    [ -d ~/.icons/default ] || mkdir ~/.icons/default
+    echo "[Icon Theme]" > ~/.icons/default/index.theme
+    echo "Name=Default" >> ~/.icons/default/index.theme
+    echo "Comment=Default Cursor Theme" >> ~/.icons/default/index.theme
+
+    echo "Which cursor theme to install? [P]"
+    read cursor_theme
+
+    [ -n $cursor_theme ] || cursor_theme="P"
+
+    case $cursor_theme in "p" | "P")
+        wget "https://dl1.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1Njk1MjQ0OTYiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6ImQxZTY1ZDA2MWFiMWExYzA4ZjUzMTJkNTI3ZDA1YWViZDY3NWQxMGM2NDVmNDRlOTY3Njk4OTk4MGQ4MDgwOTUyOWEyNWFiOWE4MTk4N2FiMTI2OWVhNjNkYzEwMjMyZTFhYTRhYWU2MTBlM2JkMzUxZjM4NTlhYmZkMjQ0ZGM4IiwidCI6MTYzNzM1MDY5OSwic3RmcCI6IjhhOWViMDFkNTM0MDRlYzRkOTJjNzIwYzgyMzRmOTVmIiwic3RpcCI6IjgxLjIwNS4zNy4xMzIifQ.8lAEEFU9NpdC1ASkBVUgZElbykPhYY19RfFJn_iFnvo/PearDarkCursors.tar.gz"
+        tar xf PearDarkCursors.tar.gz
+
+        [ -d ~/.local ] || mkdir ~/.local 
+        && [ -d ~/.local/share ] || mkdir ~/.local/share 
+        && [ -d ~/.local/share/icons ] || mkdir ~/.local/share/icons
+        cp -r PearDarkCursors ~/.local/share/icons/ 
+        echo "Inherits=PearDarkCursors" >> ~/.icons/default/index.theme
+        ;;
+    esac
+esac
