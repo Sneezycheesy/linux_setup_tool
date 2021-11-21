@@ -255,6 +255,11 @@ bindsym $mod+Shift+d exec "~/.config/scripts/env/bin/python3 ~/.config/scripts/f
 bindsym $mod+o exec "~/.config/scripts/layout.py"
 bindsym $mod+p exec $passmenu
 bindsym $mod+Control+p exec $passmenu_type
+
+# Changing audio devices
+bindsym $mod+Mod1+1 exec "sh ~/.scripts/volume.sh sink speakers"
+bindsym $mod+Mod1+2 exec "sh ~/.scripts/volume.sh sink headset"
+bindsym $mod+Control+1 exec "sh ~/.scripts/volume.sh source headset"
 #
 # Notifications
 #
@@ -268,18 +273,19 @@ bindsym $mod+Mod1+f exec firefox
 font Cozette 9
 gaps inner 22
 gaps outer -8
-default_border none
+default_border pixel 3 
+default_floating_border pixel 2
 
-border_images.focused ~/.config/sway/borders/focused_border.png
-border_images.focused_inactive ~/.config/sway/borders/focused_inactive.png
-border_images.unfocused ~/.config/sway/borders/unfocused.png
-border_images.urgent ~/.config/sway/borders/urgent.png
+#border_images.focused ~/.config/sway/borders/focused_border.png
+#border_images.focused_inactive ~/.config/sway/borders/focused_inactive.png
+#border_images.unfocused ~/.config/sway/borders/unfocused.png
+#border_images.urgent ~/.config/sway/borders/urgent.png
 
 #
 # Colours
 #
-client.background n/a #434c5e n/a
-client.focused #434c5e #434c5e #eceff4 #434c5e #434c5e
+client.background 2 #434c5e 4
+client.focused #ffffff #ffffff #ffffff #00ac6f #66AAFF
 client.focused_inactive #3b4252 #3b4252 #eceff4 #3b4252 #3b4252
 client.unfocused #3b4252 #3b4252 #eceff4 #3b4252 #3b4252
 #client.urgent #434c5e #434c5e #eceff4 #434c5e #434c5e

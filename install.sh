@@ -15,7 +15,7 @@ setPackages() {
 }
 
 installPackages() {
-    echo $packages
+    # echo $packages
     yay -S $packages
 }
 
