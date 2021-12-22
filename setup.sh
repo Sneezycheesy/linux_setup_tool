@@ -8,41 +8,49 @@
 #   - Browsers
 #
 #
-yay=" "
-gaming=" "
-printing=" "
-wm=" "
-browser=" "
-
-installYay() {
-    [ -n "$git" ] || sudo pacman -S git
-    [ -n "$go" ] || sudo pacman -S go
-    echo "installing yay"
-    git clone https://aur.archlinux.org/yay
-    cd yay
-    makepkg
-    sudo pacman -U yay*.pkg.*
-    cd ..
-    rm -rf yay
+installPackages() {
+    packages=""
+    while read package; do
+        packages="${packages} ${package}"
+    done < packages/$1.txt
+    
+    sudo -u ${username} yay -S ${packages}
 }
 
-displayMenu() {
-    echo "Welcome to this setup script, let's get into it"
-    echo "[$yay] 0. Install yay (only works on Arch Linux)"
-    echo "[$gaming] 1. Install packages for gaming (wine, dxvk, steam, etc.)"
-    echo "[$printing] 2. Install printer services"
-    echo "[$wm] 3. Install a window manager"
-    echo "[$browser] 4. Install a webbrowser"
-    echo "[ ] d. Done and quit"
-    read choice
-    [ -n "$choice" ] || choice="d"
+installGraphicalInterface() {
+    # TODO: Prompt what GUI to use; Possibilities:
+    #   Sway (wayland)
+    #   XMonad (xorg)
+    #   XFCE4 (xorg)
+
+    # Currently just install sway packages
+    installPackages 'sway'
 }
 
-while ( "$choice" != "d" ); do
-    case "$choice" in
-    "0") installYay ;;
-    "1") ;;
-    "2") ;;
-    "3") ;;
-    "4") ;;
-done
+installPrinter() {
+    #TODO: Prompt for custom scanner drivers
+
+    # Currently just install printer packages
+    installPackages 'print'
+}
+
+installGaming() {
+    #TODO: Prompt for installing steam/wine(-staging/wayland)
+    # Currently just install all gaming packages
+
+    installPackages 'steam'
+    installPackages 'wine'
+}
+
+runDefaultSetup() {
+    installPackages 'sway'
+    installPackages 'print'
+    installPackages 'steam'
+    installPackages 'wine'
+}
+
+main() {
+    [[ "$1" == 'default' ]] && runDefaultSetup
+}
+
+main default
