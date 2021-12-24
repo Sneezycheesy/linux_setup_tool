@@ -43,10 +43,36 @@ installGaming() {
 }
 
 runDefaultSetup() {
+    setHostname
+    addUser
+    installPackages 'packages'
     installPackages 'sway'
     installPackages 'print'
     installPackages 'steam'
     installPackages 'wine'
+}
+
+setupAudio() {
+    installPackages audio
+    sudo -u ${username} systemctl enable --machine=$(hostname)@.host --user pipewire
+    sudo -u ${username} systemctl enable --machine=$(hostname)@.host --user pipewire-pulse
+}
+
+addUser() {
+    echo "Choose a username [arch]: "
+    read username
+    [[ -n ${username} ]] || username="arch"
+    username="$(echo ${username} | tr '[:upper:]' '[:lower:]')"
+
+    useradd -G wheel,libvirt -d -s /bin/bash ${username}
+}
+
+setHostname() {
+    echo "Choose a hostname [archtop]: "
+    read hostname
+    [[ -n ${hostname} ]] || hostname="archtop"
+
+    echo ${hostname} | tr '[:upper:]' '[:lower:]' > /etc/hostname
 }
 
 main() {

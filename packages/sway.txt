@@ -2,7 +2,7 @@ wl-roots
 wayland
 sway
 swaylock-effects-git
+waybar
 xorg-xwayland
-rust
 bemenu
-wayland-bemenu
+bemenu-wayland
