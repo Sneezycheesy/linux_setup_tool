@@ -8,6 +8,14 @@
 #   - Browsers
 #
 #
+installYay() {
+    pacman -S git go
+    git clone https://aur.archlinux.org/yay
+    cd yay
+    makepkg -i
+    cd ..
+}
+
 installPackages() {
     packages=""
     while read package; do
@@ -79,4 +87,5 @@ main() {
     [[ "$1" == 'default' ]] && runDefaultSetup
 }
 
+installYay
 main default

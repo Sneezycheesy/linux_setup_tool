@@ -5,7 +5,7 @@ set $left j
 set $down l
 set $up h
 set $right k
-set $term kitty
+set $term kitty --name term
 set $menu bemenu-run -H '30' --tb '#333333' --tf '#FFFFFF' --ff '#FFFFFF' --fb '#333333' --hb '#01112a' --hf '#ffffff' --nb '#333333' --nf '#ffffff'
 set $passmenu passmenu -H '30' --tb '#333333' --tf '#FFFFFF' --ff '#FFFFFF' --fb '#333333' --hb '#01112a' --hf '#ffffff' --nb '#333333' --nf '#ffffff'
 set $passmenu_type passmenu --type -H '30' --tb '#333333' --tf '#FFFFFF' --ff '#FFFFFF' --fb '#333333' --hb '#01112a' --hf '#ffffff' --nb '#333333' --nf '#ffffff'
@@ -45,7 +45,7 @@ input * {
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    # bindsym $mod+Shift+Return exec $term
     bindsym $mod+Shift+Return exec $term --class=floating
 
     # Kill focused window
@@ -103,7 +103,7 @@ input * {
 set $wpo ~/.config/sway/wpo.sh
     # Workspace definitions
     workspace 1 
-    workspace 10 
+    workspace 0 
     workspace 3 
     workspace 4
     workspace 5
@@ -134,7 +134,7 @@ set $wpo ~/.config/sway/wpo.sh
     bindsym $mod+7 exec $wpo 7
     bindsym $mod+8 exec $wpo 8
     bindsym $mod+9 exec $wpo 9
-    bindsym $mod+0 exec $wpo 10
+    bindsym $mod+0 exec $wpo 0
 
 #    bindsym $mod+Ctrl+1 workspace 1b
 #    bindsym $mod+Ctrl+2 workspace 2b
@@ -157,7 +157,7 @@ set $wpo ~/.config/sway/wpo.sh
     bindsym $mod+Shift+7 move container to workspace 7
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
+    bindsym $mod+Shift+0 move container to workspace 0
 
 #    bindsym $mod+Shift+Ctrl+1 move container to workspace 1b
 #    bindsym $mod+Shift+Ctrl+2 move container to workspace 2b
@@ -207,8 +207,7 @@ set $wpo ~/.config/sway/wpo.sh
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-    bindsym Menu scratchpad show
+    bindsym Menu [instance="chromium"] scratchpad show
 
 #
 # Resizing containers:
@@ -304,9 +303,11 @@ include /etc/sway/config.d/*
 #
 for_window [app_id="floating"] floating enable
 for_window [title="Wine\sSystem\sTray"] kill
-for_window [title="t?T?hunderbird"] move container to workspace 10
+assign [title="t?T?hunderbird"] 0
 for_window [title="\w*\s*Discord"] move scratchpad
+# for_window [title="kitty"] move scratchpad
 for_window [title="\w*\s*Discord"] resize set 1200 800
+for_window [title="o*O*rigin" tiling] kill
 #
 # Fix Firefox braindamage
 #

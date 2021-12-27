@@ -1,0 +1,24 @@
+2021/12/27-14:57:00.386 3 Reusing MANIFEST /home/joshii/.config/chromium/Default/Local Storage/leveldb/MANIFEST-000001
+2021/12/27-14:57:00.387 3 Recovering log #1412
+2021/12/27-14:57:00.388 3 Reusing old log /home/joshii/.config/chromium/Default/Local Storage/leveldb/001412.log 
+2021/12/27-14:58:01.522 3 Level-0 table #1416: started
+2021/12/27-14:58:01.577 3 Level-0 table #1416: 86758 bytes OK
+2021/12/27-14:58:01.611 3 Delete type=0 #1412
+2021/12/27-14:58:01.612 3 Compacting 4@0 + 1@1 files
+2021/12/27-14:58:01.670 3 Generated table #1417@0: 113 keys, 272587 bytes
+2021/12/27-14:58:01.670 3 Compacted 4@0 + 1@1 files => 272587 bytes
+2021/12/27-14:58:01.709 3 compacted to: files[ 0 1 1 0 0 0 0 ]
+2021/12/27-14:58:01.711 3 Delete type=2 #1413
+2021/12/27-14:58:01.711 3 Delete type=2 #1411
+2021/12/27-14:58:01.712 3 Delete type=2 #1409
+2021/12/27-14:58:01.712 3 Delete type=2 #1416
+2021/12/27-14:58:01.712 3 Delete type=2 #1407
+2021/12/27-15:58:01.549 29 Level-0 table #1419: started
+2021/12/27-15:58:01.597 29 Level-0 table #1419: 87336 bytes OK
+2021/12/27-15:58:01.658 29 Delete type=0 #1415
+2021/12/27-16:59:01.539 77 Level-0 table #1421: started
+2021/12/27-16:59:01.588 77 Level-0 table #1421: 86451 bytes OK
+2021/12/27-16:59:01.656 77 Delete type=0 #1418
+2021/12/27-18:00:01.522 b1 Level-0 table #1423: started
+2021/12/27-18:00:01.571 b1 Level-0 table #1423: 86578 bytes OK
+2021/12/27-18:00:01.606 b1 Delete type=0 #1420
