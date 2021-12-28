@@ -58,12 +58,13 @@ runDefaultSetup() {
     installPackages 'print'
     installPackages 'steam'
     installPackages 'wine'
+    setupEfiStub
 }
 
 setupAudio() {
     installPackages audio
-    sudo -u ${username} systemctl enable --machine=$(hostname)@.host --user pipewire
-    sudo -u ${username} systemctl enable --machine=$(hostname)@.host --user pipewire-pulse
+    sudo -u ${username} systemctl enable --machine=${username}@.host --user pipewire
+    sudo -u ${username} systemctl enable --machine=${username}@.host --user pipewire-pulse
 }
 
 addUser() {
@@ -81,6 +82,40 @@ setHostname() {
     [[ -n ${hostname} ]] || hostname="archtop"
 
     echo ${hostname} | tr '[:upper:]' '[:lower:]' > /etc/hostname
+}
+
+setupEfiStub() {
+    lsblk -o PATH,SIZE,LABEL,MOUNTPOINT
+    while [[ -n ${boot_device} || -n ${boot_partition} ]]; do
+        echo "Please choose the boot device (i.e. /dev/sda): "
+        read boot_device
+        echo "Please choose the boot partition [1]: "
+        read boot_partition
+        [[ -n "${boot_partition}" ]] || boot_partition=1
+    done
+
+    while [[ -n "${root_partuuid}" ]]; do
+        lsblk -o PATH,SIZE,LABEL,MOUNTPOINT
+        echo "Please choose the root partition (i.e. /dev/sda3):"
+        read root_partition
+
+        root_partuuid="$(lsblk -o PATH,PARTUUID | grep ${root_partition} | awk '{print $2}')"
+    done
+
+    echo "Want to set up hibernation?[y/N]"
+    read i_want_hibernation
+    [[ -n "${i_want_hibernation}" || $(echo "${i_want_hibernation} | tr [:upper:] [:lower:]") != "y" ]] || i_want_hibernation="N"
+    if [[ "y" = $(echo "${i_want_hibernation}" | tr [:upper:] [:lower:]) ]]; then
+        echo "Please choose the swap partition (i.e. /dev/sda2):"
+        read swap_partition
+        swap_partuuid="$(lsblk -o PATH,PARTUUID | grep ${swap_partition} | awk '{print $2}')"
+
+        efibootmgr --disk ${boot_device} --part ${boot_partition} --create --label "Arch Linux" --loader /vmlinuz-linux \ 
+        --unicode "root=PARTUUID=${root_partuuid} resume=PARTUUID=${swap_partuuid} rw initrd=\initramfs-linux.img" --verbose
+    else
+        efibootmgr --disk ${boot_device} --part ${boot_partition} --create --label "Arch Linux" --loader /vmlinuz-linux \ 
+        --unicode "root=PARTUUID=${root_partuuid} rw initrd=\initramfs-linux.img" --verbose
+    fi
 }
 
 main() {
