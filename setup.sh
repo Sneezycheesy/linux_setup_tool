@@ -12,7 +12,7 @@ installYay() {
     pacman -S git go
     git clone https://aur.archlinux.org/yay
     cd yay
-    makepkg -i
+    sudo -u $username makepkg -i
     cd ..
 }
 
