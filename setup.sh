@@ -51,6 +51,7 @@ installGaming() {
 }
 
 runDefaultSetup() {
+    installYay
     setHostname
     addUser
     installPackages 'packages'
@@ -123,5 +124,4 @@ main() {
     [[ "$1" == 'default' ]] && runDefaultSetup
 }
 
-installYay
 main default
