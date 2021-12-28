@@ -85,6 +85,7 @@ setHostname() {
 }
 
 setupEfiStub() {
+    pacman -S efimanager
     lsblk -o PATH,SIZE,LABEL,MOUNTPOINT
     while [[ -n ${boot_device} || -n ${boot_partition} ]]; do
         echo "Please choose the boot device (i.e. /dev/sda): "
