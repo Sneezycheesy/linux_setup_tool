@@ -74,7 +74,7 @@ addUser() {
     [[ -n ${username} ]] || username="arch"
     username="$(echo ${username} | tr '[:upper:]' '[:lower:]')"
 
-    useradd -G wheel,libvirt -d -s /bin/bash ${username}
+    useradd -G wheel -m -s /bin/bash ${username}
 }
 
 setHostname() {
