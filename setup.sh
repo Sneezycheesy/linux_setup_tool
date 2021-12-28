@@ -51,9 +51,9 @@ installGaming() {
 }
 
 runDefaultSetup() {
-    installYay
     setHostname
     addUser
+    installYay
     installPackages 'packages'
     installPackages 'sway'
     installPackages 'print'
