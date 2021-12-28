@@ -1,0 +1,11 @@
+xmonad
+xmonad-contrib
+xmonad-utils
+xmonad-extras-git
+bemenu
+xmobar
+xclip
+xorg-server
+xorg-server-xephyr
+xorg-xinit
+betterlockscreen

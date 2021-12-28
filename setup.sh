@@ -32,7 +32,7 @@ installGraphicalInterface() {
     #   XFCE4 (xorg)
 
     # Currently just install sway packages
-    installPackages 'sway'
+    installPackages xmonad
 }
 
 installPrinter() {
