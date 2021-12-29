@@ -4,5 +4,5 @@ sway
 swaylock-effects-git
 waybar
 xorg-xwayland
-bemenu
 bemenu-wayland
+bemenu-dmenu-wayland

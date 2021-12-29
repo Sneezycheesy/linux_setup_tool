@@ -111,12 +111,11 @@ myScratchpads = [NS "social" spawnChromium findChrom floatChrom,
                  NS "term" spawnTerm findTerm floatTerm]
     where
       spawnChromium = "chromium"
-      findChrom = name =? "Discord - Chromium"
-             where name = stringProperty "WM_NAME"
+      findChrom = className =? "Chromium"
       floatChrom = customFloating $ W.RationalRect l t w h
              where
               h = 0.7
-              w = 0.4
+              w = 0.6
               t = 0.8 -h
               l = 0.8 -w
       spawnTerm = myTerminal ++ " --name term"
@@ -571,8 +570,8 @@ myManageHook = do
       className =? "explorer.exe" --> doIgnore, -- Wine
       className =? "wpsoffice" --> doFullFloat,
       className =? "firefox" <&&> resource =? "Toolkit" --> doFloat,
-      resource =? "chromium" <||> name =? "Discord - Chromium" --> doFloat,
-      resource =? "chromium" <||> name =? "Discord - Chromium" --> doShift "NSP",
+      resource =? "chromium" --> doFloat,
+      resource =? "chromium" --> doShift "NSP",
       className =? "starcitizen.exe" --> doFullFloat,
       className =? "rsi launcher.exe" --> (ask >>= doF . W.sink),
       resource =? "desktop_window" --> doIgnore,

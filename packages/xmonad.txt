@@ -6,7 +6,6 @@ bemenu
 xmobar
 xclip
 xorg-server
-xorg-server-xephyr
 xorg-xinit
 twmnd
 nitrogen
@@ -15,3 +14,5 @@ xorg-xset
 xorg-xsetkbmap
 xorg-xsetroot
 i3lock
+bemenu-x11
+bemenu-dmenu
