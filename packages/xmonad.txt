@@ -8,10 +8,10 @@ xclip
 xorg-server
 xorg-server-xephyr
 xorg-xinit
-betterlockscreen
 twmnd
 nitrogen
 picom
 xorg-xset
 xorg-xsetkbmap
 xorg-xsetroot
+i3lock
