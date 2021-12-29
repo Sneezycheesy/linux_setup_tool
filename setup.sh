@@ -12,7 +12,7 @@ installYay() {
     pacman -S git go
     git clone https://aur.archlinux.org/yay
     cd yay
-    sudo -u $username makepkg -i
+    su $username makepkg -si
     cd ..
 }
 
@@ -22,7 +22,7 @@ installPackages() {
         packages="${packages} ${package}"
     done < packages/$1.txt
     
-    sudo -u ${username} yay -S ${packages}
+    su ${username} yay -S ${packages}
 }
 
 installGraphicalInterface() {
@@ -64,8 +64,8 @@ runDefaultSetup() {
 
 setupAudio() {
     installPackages audio
-    sudo -u ${username} systemctl enable --machine=${username}@.host --user pipewire
-    sudo -u ${username} systemctl enable --machine=${username}@.host --user pipewire-pulse
+    su ${username} systemctl enable --machine=${username}@.host --user pipewire
+    su ${username} systemctl enable --machine=${username}@.host --user pipewire-pulse
 }
 
 addUser() {
