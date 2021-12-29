@@ -108,7 +108,8 @@ myClickJustFocuses :: Bool
 myClickJustFocuses = False
 
 myScratchpads = [NS "social" spawnChromium findChrom floatChrom,
-                 NS "term" spawnTerm findTerm floatTerm]
+                 NS "term" spawnTerm findTerm floatTerm,
+                 NS "mail" spawnMail findMail manageMail]
     where
       spawnChromium = "chromium"
       findChrom = className =? "Chromium"
@@ -125,7 +126,15 @@ myScratchpads = [NS "social" spawnChromium findChrom floatChrom,
               h = 0.7
               w = 0.7
               t = 0.8 -h
-              l = 0.8 -w   
+              l = 0.8 -w
+      spawnMail = "thunderbird"
+      findMail = resource =? "Mail"
+      manageMail = customFloating $ W.RationalRect l t w h
+             where
+              h = 0.7
+              w = 0.7
+              t = 0.8 -h
+              l = 0.8 -w
 -- Width of the window border in pixels.
 --
 myBorderWidth = 0
@@ -357,7 +366,8 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
       ((modm, xK_Right), nextWS),
       -- Run xmessage with a summary of the default keybindings (useful for beginners)
       ((modm .|. shift, xK_slash), spawn ("echo \"" ++ help ++ "\" | xmessage -file -")),
-      ((0, xK_Menu), namedScratchpadAction myScratchpads "social")
+      ((0, xK_Menu), namedScratchpadAction myScratchpads "social"),
+      ((modm, xK_Menu), namedScratchpadAction myScratchpads "mail")
     ]
       ++
       --
@@ -576,7 +586,7 @@ myManageHook = do
       className =? "rsi launcher.exe" --> (ask >>= doF . W.sink),
       resource =? "desktop_window" --> doIgnore,
       resource =? "kdesktop" --> doIgnore,
-      className =? "Thunderbird" --> doShift myWorkspace10
+      className =? "Thunderbird" --> doFloat
    ] where
        name = stringProperty "WM_NAME"
 ------------------------------------------------------------------------
