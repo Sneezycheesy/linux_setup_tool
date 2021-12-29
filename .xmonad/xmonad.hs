@@ -575,7 +575,8 @@ myManageHook = do
       className =? "starcitizen.exe" --> doFullFloat,
       className =? "rsi launcher.exe" --> (ask >>= doF . W.sink),
       resource =? "desktop_window" --> doIgnore,
-      resource =? "kdesktop" --> doIgnore
+      resource =? "kdesktop" --> doIgnore,
+      className =? "Thunderbird" --> doShift myWorkspace10
    ] where
        name = stringProperty "WM_NAME"
 ------------------------------------------------------------------------
