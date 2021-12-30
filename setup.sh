@@ -99,21 +99,18 @@ setHostname() {
 setupEfiStub() {
     pacman -S efibootmgr
     lsblk -o PATH,SIZE,LABEL,MOUNTPOINT
-    while [[ -n ${boot_device} || -n ${boot_partition} ]]; do
-        echo "Please choose the boot device (i.e. /dev/sda): "
-        read boot_device
-        echo "Please choose the boot partition [1]: "
-        read boot_partition
-        [[ -n "${boot_partition}" ]] || boot_partition=1
-    done
+    
+    echo "Please choose the boot device (i.e. /dev/sda): "
+    read boot_device
+    echo "Please choose the boot partition [1]: "
+    read boot_partition
+    [[ -n "${boot_partition}" ]] || boot_partition=1
 
-    while [[ -n "${root_partuuid}" ]]; do
-        lsblk -o PATH,SIZE,LABEL,MOUNTPOINT
-        echo "Please choose the root partition (i.e. /dev/sda3):"
-        read root_partition
+    lsblk -o PATH,SIZE,LABEL,MOUNTPOINT
+    echo "Please choose the root partition (i.e. /dev/sda3):"
+    read root_partition
 
         root_partuuid="$(lsblk -o PATH,PARTUUID | grep ${root_partition} | awk '{print $2}')"
-    done
 
     echo "Want to set up hibernation?[y/N]"
     read i_want_hibernation
