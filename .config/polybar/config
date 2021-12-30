@@ -121,6 +121,8 @@ label-empty-background = ${colors.module-background}
 label-empty-padding = 1
 label-empty-margin = 0.5
 
+label-nsp = ''
+
 [module/clock]
 type = internal/date
 interval = 1

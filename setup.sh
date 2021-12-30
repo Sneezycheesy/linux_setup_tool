@@ -60,6 +60,10 @@ runDefaultSetup() {
 
     setHostname
     addUser
+    echo Set password for main account
+    passwd $username
+    gpasswd -a $username wheel
+    
     installYay
     installPackages 'packages'
     installPackages 'sway'
