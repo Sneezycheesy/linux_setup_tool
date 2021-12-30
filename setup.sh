@@ -51,6 +51,12 @@ installGaming() {
 }
 
 runDefaultSetup() {
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+    locale-gen
+
+    ln -sf /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+    hwclock --systohc
+
     setHostname
     addUser
     installYay
