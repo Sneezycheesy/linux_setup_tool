@@ -338,6 +338,7 @@ format-foreground = #FFF
 format-connected-background = ${colors.module-background}
 format-connected-padding = 1
 format-connected-underline = #FF5F00
+format-connected-margin = 1
 
 [module/networkspeedup]
 type = internal/network
@@ -352,6 +353,7 @@ format-foreground = #FFF
 format-connected-background = ${colors.module-background}
 format-connected-padding = 1
 format-connected-underline = #FF3F00
+format-connected-margin = 1
 
 [module/date]
 type = internal/date
