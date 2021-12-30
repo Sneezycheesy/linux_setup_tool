@@ -13,7 +13,7 @@ installYay() {
     git clone https://aur.archlinux.org/yay
     chown -R $username:$username .
     cd yay
-    su $username -c 'makepkg -si'
+    su $username -c 'makepkg -Si'
     cd ..
 }
 
@@ -63,7 +63,7 @@ runDefaultSetup() {
     echo Set password for main account
     passwd $username
     gpasswd -a $username wheel
-    
+
     installYay
     installPackages 'packages'
     installPackages 'sway'
