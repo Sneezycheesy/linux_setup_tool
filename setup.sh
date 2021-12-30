@@ -12,7 +12,7 @@ installYay() {
     pacman -S git go
     git clone https://aur.archlinux.org/yay
     cd yay
-    su $username makepkg -si
+    su $username -c 'makepkg -si'
     cd ..
 }
 
@@ -22,7 +22,7 @@ installPackages() {
         packages="${packages} ${package}"
     done < ./packages/$1.txt
     
-    su ${username} yay -S ${packages}
+    su ${username} -c "yay -S ${packages}"
 }
 
 installGraphicalInterface() {
@@ -70,8 +70,8 @@ runDefaultSetup() {
 
 setupAudio() {
     installPackages audio
-    su ${username} systemctl enable --machine=${username}@.host --user pipewire
-    su ${username} systemctl enable --machine=${username}@.host --user pipewire-pulse
+    systemctl enable --machine=${username}@.host --user pipewire
+    systemctl enable --machine=${username}@.host --user pipewire-pulse
 }
 
 addUser() {
@@ -92,7 +92,7 @@ setHostname() {
 }
 
 setupEfiStub() {
-    pacman -S efimanager
+    pacman -S efibootmgr
     lsblk -o PATH,SIZE,LABEL,MOUNTPOINT
     while [[ -n ${boot_device} || -n ${boot_partition} ]]; do
         echo "Please choose the boot device (i.e. /dev/sda): "
