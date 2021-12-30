@@ -53,8 +53,8 @@ border-size = 0
 module-margin = 0
 
 modules-left = ewmh
-modules-center = networkspeeddown networkspeedup
-modules-right = volume cpu memory pulseaudio-microphone pulseaudio-microphone-muted pulseaudio-custom pulseaudio-custom-muted clock
+modules-center = clock
+modules-right = volume cpu memory pulseaudio-microphone pulseaudio-microphone-muted pulseaudio-custom pulseaudio-custom-muted networkspeeddown networkspeedup
 
 [bar/screen1]
 font-0 = FontAwesome5Free:pixelsize=11:0
@@ -81,8 +81,8 @@ border-size = 0
 module-margin = 0
 
 modules-left = ewmh
-modules-center = networkspeeddown networkspeedup
-modules-right = volume cpu memory pulseaudio-microphone pulseaudio-microphone-muted pulseaudio-custom pulseaudio-custom-muted clock
+modules-center = clock
+modules-right = volume cpu memory pulseaudio-microphone pulseaudio-microphone-muted pulseaudio-custom pulseaudio-custom-muted networkspeeddown networkspeedup
 
 [module/ewmh]
 type = internal/xworkspaces
