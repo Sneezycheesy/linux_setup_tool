@@ -20,7 +20,7 @@ installPackages() {
     packages=""
     while read package; do
         packages="${packages} ${package}"
-    done < packages/$1.txt
+    done < ./packages/$1.txt
     
     su ${username} yay -S ${packages}
 }
