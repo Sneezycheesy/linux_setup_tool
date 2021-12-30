@@ -586,7 +586,7 @@ myManageHook = do
       className =? "rsi launcher.exe" --> (ask >>= doF . W.sink),
       resource =? "desktop_window" --> doIgnore,
       resource =? "kdesktop" --> doIgnore,
-      className =? "Thunderbird" --> doFloat
+      className =? "Mail" --> doFloat
    ] where
        name = stringProperty "WM_NAME"
 ------------------------------------------------------------------------
@@ -630,6 +630,8 @@ myStartupHook = do
       spawnOnce "xsetroot -cursor_name left_ptr",
       spawnOnce "xset -dpms && xset s off",
       spawnOnce "picom",
+      spawnOnce "polybar screen0",
+      spawnOnce "polybar screen1",
       namedScratchpadAction myScratchpads "social"
     ]
 
@@ -651,16 +653,20 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 --
 
 main = do
-  xmproc0 <- spawnPipe $ "/usr/bin/xmobar -f with_alsa -n xmonad -x 0 " ++ xmobarDir ++ ".xmobarrc"
-  xmproc1 <- spawnPipe $ "/usr/bin/xmobar -f with_alsa -n xmonad -x 1 " ++ xmobarDir ++ ".xmobarrc"
+  dbus <- D.connectSession
+  D.requestName dbus (D.busName_ "org.xmonad.Log")
+    [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
+  -- xmproc0 <- spawnPipe $ "/usr/bin/xmobar -f with_alsa -n xmonad -x 0 " ++ xmobarDir ++ ".xmobarrc"
+  -- xmproc1 <- spawnPipe $ "/usr/bin/xmobar -f with_alsa -n xmonad -x 1 " ++ xmobarDir ++ ".xmobarrc"
   -- xmproc2 <- spawnPipe $ "/usr/bin/xmobar -f with_alsa -n xmonad -x 2 " ++ xmobarDir ++ ".xmobarrc"
   xmonad $
+    ewmh $
     docks $
       defaults
         { logHook =
             dynamicLogWithPP $
               def
-                { ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x, -- >> hPutStrLn xmproc2 x,
+                { -- ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x, -- >> hPutStrLn xmproc2 x,
                   ppCurrent = xmobarColor "#5afc5a" "" . wrap "[ " " ]",
                   -- , ppHiddenNoWindows = xmobarColor "#b3afc2" "" . wrap "| " ""
                   ppHidden = xmobarColor "#666" "",

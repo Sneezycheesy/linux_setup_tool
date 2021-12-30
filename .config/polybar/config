@@ -116,7 +116,7 @@ label-occupied-padding = 1
 label-occupied-margin = 0.5
 
 label-empty = %name%
-label-empty-underline = ${colors.background}
+label-empty-underline = ${colors.background-alt}
 label-empty-background = ${colors.module-background}
 label-empty-padding = 1
 label-empty-margin = 0.5
