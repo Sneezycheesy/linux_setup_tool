@@ -11,6 +11,7 @@
 installYay() {
     pacman -S git go
     git clone https://aur.archlinux.org/yay
+    chown -R $username:$username .
     cd yay
     su $username -c 'makepkg -si'
     cd ..
