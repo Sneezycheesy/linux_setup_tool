@@ -64,6 +64,7 @@ runDefaultSetup() {
 
     installYay
     installPackages 'packages'
+    installPackages 'xmonad'
     installPackages 'print'
     installPackages 'steam'
     installPackages 'wine'
