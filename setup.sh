@@ -71,9 +71,7 @@ runDefaultSetup() {
     setupNetworkManager
     installPackages 'packages'
     installPackages 'xmonad'
-    installPackages 'print'
-    installPackages 'steam'
-    installPackages 'wine'
+    installPackages 'printing'
     placeConfigs
 }
 
