@@ -67,7 +67,6 @@ runDefaultSetup() {
     installPackages 'print'
     installPackages 'steam'
     installPackages 'wine'
-    setupEfiStub
     placeConfigs
 }
 
