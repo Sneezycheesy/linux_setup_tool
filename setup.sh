@@ -64,7 +64,6 @@ runDefaultSetup() {
 
     installYay
     installPackages 'packages'
-    installPackages 'sway'
     installPackages 'print'
     installPackages 'steam'
     installPackages 'wine'
