@@ -62,6 +62,10 @@ runDefaultSetup() {
     setHostname
     addUser
 
+    pacman-key --init
+    pacman-key --populate archlinux
+    pacman -Syy
+
     installYay
     setupAudio
     setupNetworkManager
@@ -74,8 +78,8 @@ runDefaultSetup() {
 }
 
 setupNetworkManager() {
-    su ${username} -c 'yay -S networkmanager-iwd networkmanager-dmenu-git'
-    systemctl enable iwd
+    su ${username} -c 'yay -S networkmanager networkmanager-dmenu-git'
+    systemctl enable NetworkManager
 }
 
 setupAudio() {
