@@ -63,6 +63,7 @@ runDefaultSetup() {
     addUser
 
     installYay
+    setupAudio
     installPackages 'packages'
     installPackages 'xmonad'
     installPackages 'print'
