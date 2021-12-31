@@ -74,8 +74,8 @@ runDefaultSetup() {
 
 setupAudio() {
     installPackages audio
-    systemctl enable --machine=${username}@.host --user pipewire
-    systemctl enable --machine=${username}@.host --user pipewire-pulse
+    su ${username} -c 'sudo systemctl enable --machine=${username}@.host --user pipewire'
+    su ${username} -c 'sudo systemctl enable --machine=${username}@.host --user pipewire-pulse'
 }
 
 addUser() {
