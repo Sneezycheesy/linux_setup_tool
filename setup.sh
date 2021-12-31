@@ -64,12 +64,18 @@ runDefaultSetup() {
 
     installYay
     setupAudio
+    setupNetworkManager
     installPackages 'packages'
     installPackages 'xmonad'
     installPackages 'print'
     installPackages 'steam'
     installPackages 'wine'
     placeConfigs
+}
+
+setupNetworkManager() {
+    su ${username} -c 'yay -S networkmanager-iwd networkmanager-dmenu-git'
+    systemctl enable iwd
 }
 
 setupAudio() {
