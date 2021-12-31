@@ -33,7 +33,7 @@ complete -C "/usr/bin/symfony self:autocomplete" symfony
 
 if [[ "$(tty)" = "/dev/tty2" || "$(tty)" = "/dev/tty1" ]]; then
 	cp ~/.config/chromium/Default/Prefs ~/.config/chromium/Default/Preferences &&
-	sway;
+	startx ~/.xinitrc;
 elif [[ "$(tty)" = "/dev/tty3" ]]; then
 	startx ~/.xinitrc
 else
