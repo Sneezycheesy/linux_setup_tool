@@ -100,6 +100,7 @@ setHostname() {
 }
 
 setupEfiStub() {
+    mkinitcpio -p linux-zen
     pacman -S efibootmgr
     lsblk -o PATH,SIZE,LABEL,MOUNTPOINT
     
