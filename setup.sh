@@ -61,9 +61,6 @@ runDefaultSetup() {
 
     setHostname
     addUser
-    echo Set password for main account
-    passwd $username
-    gpasswd -a $username wheel
 
     installYay
     installPackages 'packages'
@@ -87,6 +84,11 @@ addUser() {
     username="$(echo ${username} | tr '[:upper:]' '[:lower:]')"
 
     useradd -G wheel -m -s /bin/bash ${username}
+    
+    echo Set password for main account
+    passwd $username
+
+    echo '%wheel ALL=(ALL) NOPASSWD: ALL' | EDITOR='tee -a' visudo
 }
 
 setHostname() {
