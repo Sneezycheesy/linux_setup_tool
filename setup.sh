@@ -69,6 +69,7 @@ runDefaultSetup() {
     installPackages 'steam'
     installPackages 'wine'
     setupEfiStub
+    placeConfigs
 }
 
 setupAudio() {
@@ -133,6 +134,11 @@ setupEfiStub() {
         efibootmgr --disk ${boot_device} --part ${boot_partition} --create --label "Arch Linux" --loader /vmlinuz-linux \ 
         --unicode "root=PARTUUID=${root_partuuid} rw initrd=\initramfs-linux.img" --verbose
     fi
+}
+
+placeConfigs() {
+    cp -r .config .screenlayouts .scripts .xmonad .icons /home/${username}
+    chown -R ${username} /home/${username}
 }
 
 main() {
