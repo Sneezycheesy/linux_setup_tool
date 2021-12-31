@@ -88,6 +88,9 @@ addUser() {
     echo Set password for main account
     passwd $username
 
+    echo Set password for ROOT account
+    passwd
+
     echo '%wheel ALL=(ALL) NOPASSWD: ALL' | EDITOR='tee -a' visudo
 }
 
