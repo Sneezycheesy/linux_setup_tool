@@ -136,11 +136,11 @@ setupEfiStub() {
         read swap_partition
         swap_partuuid="$(lsblk -o PATH,PARTUUID | grep ${swap_partition} | awk '{print $2}')"
 
-        efibootmgr --disk ${boot_device} --part ${boot_partition} --create --label "Arch Linux" --loader /vmlinuz-linux \ 
-        --unicode "root=PARTUUID=${root_partuuid} resume=PARTUUID=${swap_partuuid} rw initrd=\initramfs-linux.img" --verbose
+        efibootmgr --disk ${boot_device} --part ${boot_partition} --create --label "Arch Linux" --loader /vmlinuz-linux-zen \ 
+        --unicode "root=PARTUUID=${root_partuuid} resume=PARTUUID=${swap_partuuid} rw initrd=\initramfs-linux-zen.img" --verbose
     else
-        efibootmgr --disk ${boot_device} --part ${boot_partition} --create --label "Arch Linux" --loader /vmlinuz-linux \ 
-        --unicode "root=PARTUUID=${root_partuuid} rw initrd=\initramfs-linux.img" --verbose
+        efibootmgr --disk ${boot_device} --part ${boot_partition} --create --label "Arch Linux" --loader /vmlinuz-linux-zen \ 
+        --unicode "root=PARTUUID=${root_partuuid} rw initrd=\initramfs-linux-zen.img" --verbose
     fi
 }
 
